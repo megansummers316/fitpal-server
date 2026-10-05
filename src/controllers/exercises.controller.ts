@@ -1,6 +1,9 @@
 // express imports
 import express, { Request, Response, Router } from "express";
 
+//model import for CRUD
+import Exercise from "../models/exercise.model.js";
+
 // create router to map url requests to correct methods
 const router: Router = express.Router();
 
@@ -18,19 +21,22 @@ let exercises = [
 ];
 
 /* GET: /api/v1/exercises => fetch all exercises */
-router.get('/', (req: Request, res: Response) => {
+router.get('/', async (req: Request, res: Response) => {
+    //use Model to retrieve exercise documents from MongoDB
+    const exercises = await Exercise.find();
     return res.status(200).json(exercises);
 });
 
 /* POST: /api/v1/exercises => create new exercise */
-router.post('/', (req: Request,  res: Response) => {
+router.post('/', async (req: Request,  res: Response) => {
     // validate request body
     if (!req.body) {
         return res.status(400).json({ err: 'Invalid Request Body' });
     }
 
     // add new exercise to array from request body
-    exercises.push(req.body);
+    //exercises.push(req.body);
+    await Exercise.create(req.body);
 
     // send response back
     return res.status(201).json(); // 201: resource created

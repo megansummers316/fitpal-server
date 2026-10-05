@@ -1,19 +1,14 @@
-"use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
 // express imports
-const express_1 = __importDefault(require("express"));
-const mongoose_1 = __importDefault(require("mongoose"));
+import express from "express";
+import mongoose from "mongoose";
 // local file imports
-const exercises = require('./controllers/exercises.controller');
+import exercises from './controllers/exercises.controller.js';
 // create new express application
-const app = (0, express_1.default)();
-app.use(express_1.default.json()); //bodyParser.json());
+const app = express();
+app.use(express.json()); //bodyParser.json());
 //mongoose db connection
 const db = process.env.DB || '';
-mongoose_1.default.connect(db, {})
+mongoose.connect(db, {})
     .then((res) => console.log('Connected to MongoDB'))
     .catch((err) => console.log(`Connection error: ${err}`));
 // map urls to appropriate controllers

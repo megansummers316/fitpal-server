@@ -1,12 +1,9 @@
-"use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
 // express imports
-const express_1 = __importDefault(require("express"));
+import express from "express";
+//model import for CRUD
+import Exercise from "../models/exercise.model.js";
 // create router to map url requests to correct methods
-const router = express_1.default.Router();
+const router = express.Router();
 let exercises = [
     { id: 1, name: 'Squats' },
     { id: 2, name: 'Rope Jumping' },
@@ -14,17 +11,20 @@ let exercises = [
     { id: 4, name: 'Volleyball' }
 ];
 /* GET: /api/v1/exercises => fetch all exercises */
-router.get('/', (req, res) => {
+router.get('/', async (req, res) => {
+    //use Model to retrieve exercise documents from MongoDB
+    const exercises = await Exercise.find();
     return res.status(200).json(exercises);
 });
 /* POST: /api/v1/exercises => create new exercise */
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
     // validate request body
     if (!req.body) {
         return res.status(400).json({ err: 'Invalid Request Body' });
     }
     // add new exercise to array from request body
-    exercises.push(req.body);
+    //exercises.push(req.body);
+    await Exercise.create(req.body);
     // send response back
     return res.status(201).json(); // 201: resource created
 });
@@ -40,4 +40,4 @@ router.put('/:id', (req, res) => {
     return res.status(204).json({ msg: 'Exercise Updated' });
 });
 // make router public so other files can access it
-exports.default = router;
+export default router;
