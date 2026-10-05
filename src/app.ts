@@ -1,5 +1,6 @@
 // express imports
 import express, { Application } from "express";
+import mongoose from "mongoose";
 import bodyParser from "body-parser"; // to read body of http POST / PUT requests
 
 // local file imports
@@ -9,6 +10,12 @@ const exercises = require('./controllers/exercises.controller');
 const app: Application = express();
 app.use(express.json()); //bodyParser.json());
 
+//mongoose db connection
+const db: string = process.env.DB || '';
+mongoose.connect(db, {})
+    .then((res) => console.log('Connected to MongoDB'))
+    .catch((err) => console.log(`Connection error: ${err}`));
+
 // map urls to appropriate controllers
 app.use('/api/v1/exercises', exercises);
 
@@ -16,6 +23,6 @@ app.use('/api/v1/exercises', exercises);
 const port = process.env.PORT || 4000;
 app.listen(port, () => {
     // confirm server running
-    console.log(`Express running on port {port}`, port);
+    console.log(`Express running on port `, port);
 });
 
