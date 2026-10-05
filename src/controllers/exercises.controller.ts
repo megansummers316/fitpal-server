@@ -51,4 +51,4 @@ router.put('/:id', (req: Request,  res: Response) => {
 });
 
 // make router public so other files can access it
-module.exports = router;
+export default router;

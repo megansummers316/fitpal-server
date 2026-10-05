@@ -40,4 +40,4 @@ router.put('/:id', (req, res) => {
     return res.status(204).json({ msg: 'Exercise Updated' });
 });
 // make router public so other files can access it
-module.exports = router;
+exports.default = router;
