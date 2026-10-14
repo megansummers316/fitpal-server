@@ -1,7 +1,7 @@
-// express imports
 import dotenv from "dotenv";
 dotenv.config();
 
+// express imports
 import express, { Application } from "express";
 import mongoose from "mongoose";
 import bodyParser from "body-parser"; // to read body of http POST / PUT requests
