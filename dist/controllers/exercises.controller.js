@@ -77,7 +77,9 @@ router.get('/:id', async (req, res) => {
  *       201:
  *         description: Exercise created
  *       400:
- *         description: Bad request
+ *         description: Bad Request
+ *       404:
+ *         description: Exercise not found
  */
 router.post('/', async (req, res) => {
     // validate request body
