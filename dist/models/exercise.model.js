@@ -1,4 +1,28 @@
 import mongoose, { Schema } from "mongoose";
+const setSchema = new Schema({
+    reps: {
+        type: Number,
+        min: 1,
+        required: true
+    },
+    setCount: {
+        type: Number,
+        min: 1,
+        required: true
+    },
+    weight: {
+        type: Number,
+        min: 1
+    },
+    units: {
+        type: String,
+        enum: ['kg', 'lbs']
+    },
+    restTime: {
+        type: Number,
+        default: 60 //seconds
+    }
+});
 const exerciseSchema = new Schema({
     name: {
         type: String,
@@ -16,7 +40,8 @@ const exerciseSchema = new Schema({
     date: {
         type: Date,
         default: Date.now
-    }
+    },
+    sets: [setSchema]
 });
 //create model and make public
 const Exercise = mongoose.model('Exercise', exerciseSchema);

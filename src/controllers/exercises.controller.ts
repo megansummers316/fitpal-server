@@ -170,5 +170,25 @@ router.delete('/:id', async (req: Request, res: Response) => {
     return res.status(200).json(exercise);
 });
 
+
+router.post('/:id/sets', async (req: Request, res: Response) => {
+    const exercise = await Exercise.findById(req.params.id); //find doc by id
+
+    if (exercise == null) return res.status(404).json({ err: 'Exercise not found' }); //if no exercise, throw an error
+
+    try {
+        //use JS 'spread' operator to destructure an array into separate properties (parsing an array)
+        //then add the set as a child object to the current exercise doc
+        exercise.sets.push({
+            ...req.body
+        })
+        //commit change to mongoDB
+        await exercise.save();
+        return res.status(201).json(exercise); //201: resource created
+    } catch (error) {
+        return res.status(400).json({ errror: JSON.stringify(error) });
+    }
+});
+
 // make router public so other files can access it
 export default router;
