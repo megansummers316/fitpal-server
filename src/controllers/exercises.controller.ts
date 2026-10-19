@@ -170,7 +170,49 @@ router.delete('/:id', async (req: Request, res: Response) => {
     return res.status(200).json(exercise);
 });
 
-
+/**
+ * @swagger
+ * /api/v1/exercises/{id}/sets:
+ *   post:
+ *     tags:
+ *       - Exercise, Sets
+ *     summary: Update selected exercise to add child SET doc
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         required: true
+ *         schema:
+ *         type: string
+ *         required: true
+ *     requestBody:
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               reps:
+ *                 type: integer
+ *                 min: 1
+ *                 required: true
+ *               setCount:
+ *                 type: integer
+ *                 min: 1
+ *                 required: true
+ *               weight:
+ *                 type: integer
+ *                 min: 1
+ *               units:
+ *                 type: string
+ *               restTime:
+ *                 type: integer
+ *     responses:
+ *       201:
+ *         description: Child set added
+ *       400:
+ *         description: Bad Request
+ *       404:
+ *         description: Exercise not found
+ */
 router.post('/:id/sets', async (req: Request, res: Response) => {
     const exercise = await Exercise.findById(req.params.id); //find doc by id
 
