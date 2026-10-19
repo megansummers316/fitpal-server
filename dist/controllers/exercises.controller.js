@@ -170,7 +170,6 @@ router.delete('/:id', async (req, res) => {
  *         required: true
  *         schema:
  *         type: string
- *         required: true
  *     requestBody:
  *       content:
  *         application/json:

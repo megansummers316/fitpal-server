@@ -183,7 +183,6 @@ router.delete('/:id', async (req: Request, res: Response) => {
  *         required: true
  *         schema:
  *         type: string
- *         required: true
  *     requestBody:
  *       content:
  *         application/json:
