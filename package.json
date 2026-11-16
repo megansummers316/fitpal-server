@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "body-parser": "^2.3.0",
+    "cors": "^2.8.6",
     "dotenv": "^18.0.7",
     "express": "^5.2.1",
     "mongoose": "^9.10.4",
@@ -9,6 +10,7 @@
     "typescript": "^7.0.2"
   },
   "devDependencies": {
+    "@types/cors": "^2.8.19",
     "@types/express": "^5.0.6",
     "@types/node": "^26.6.4",
     "@types/swagger-jsdoc": "^6.0.4",
